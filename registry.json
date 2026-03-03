@@ -14,7 +14,13 @@
       "files": [
         {
           "type": "registry:lib",
-          "path": "registry/lib/theme-manager.tsx"
+          "path": "registry/lib/theme-manager/theme-manager.tsx",
+          "target": "~/app/lib/theme-manager.tsx"
+        },
+        {
+          "type": "registry:file",
+          "path": "registry/lib/theme-manager/theme-provider.ts",
+          "target": "~/app/providers/theme-provider.tsx"
         }
       ]
     }
