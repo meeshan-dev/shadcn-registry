@@ -18,9 +18,9 @@
           "target": "~/app/lib/theme-manager.tsx"
         },
         {
-          "type": "registry:file",
+          "type": "registry:component",
           "path": "registry/lib/theme-manager/theme-provider.ts",
-          "target": "~/app/providers/theme-provider.tsx"
+          "target": "~/app/providers/theme-provider.ts"
         }
       ]
     }
