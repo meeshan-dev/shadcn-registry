@@ -34,7 +34,7 @@
     },
     {
       "type": "registry:component",
-      "name": "watch-form-state",
+      "name": "watch-form-values",
       "title": "Form Values Watcher",
       "description": "Watch specific React Hook Form values efficiently and pass them to children via render props without unnecessary rerenders.",
       "author": "M Zeeshan <https://meeshan.dev>",
@@ -42,7 +42,7 @@
       "files": [
         {
           "type": "registry:component",
-          "path": "registry/components/watch-form-state.tsx"
+          "path": "registry/components/watch-form-values.tsx"
         }
       ]
     }

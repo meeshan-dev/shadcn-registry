@@ -1,9 +1,12 @@
-type WatchFormValueProps<T> = {
+type WatchFormValuesProps<T> = {
   watch: () => T;
   children: (value: T) => React.ReactNode;
 };
 
-export function WatchFormValue<T>({ watch, children }: WatchFormValueProps<T>) {
+export function WatchFormValues<T>({
+  watch,
+  children,
+}: WatchFormValuesProps<T>) {
   const value = watch();
 
   return <>{children(value)}</>;
