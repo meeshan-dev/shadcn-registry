@@ -186,21 +186,44 @@ export const ToggleThemeButton = () => {
 
 // -------------------- Cookie Parsing -------------------- //
 
+export type ThemeType = 'light' | 'dark' | 'system';
+
 export const parseThemeCookies = (req: Request) => {
   const cookieHeader = req.headers.get('cookie') || '';
   const cookies = cookieHeader.split('; ');
 
   const themeCookie = cookies.find((c) => c.startsWith(THEME_COOKIE_KEY));
-  const colorSchemeCookie = cookies.find((c) =>
-    c.startsWith(IS_DARK_COOKIE_KEY),
+
+  const isDarkCookie = cookies.find((c) =>
+    c.startsWith(`${IS_DARK_COOKIE_KEY}=`),
   );
 
-  const theme = themeCookie
-    ? decodeURIComponent(themeCookie.split('=')[1])
-    : undefined;
-  const isDark = colorSchemeCookie
-    ? decodeURIComponent(colorSchemeCookie.split('=')[1]) === 'true'
-    : undefined;
+  let theme: ThemeType | undefined;
+  let colorScheme: string | undefined;
 
-  return { theme, isDark };
+  if (themeCookie) {
+    const themeCookieValue = themeCookie.split('=')[1];
+
+    const value = themeCookieValue
+      ? decodeURIComponent(themeCookieValue)
+      : undefined;
+
+    if (value === 'light' || value === 'dark') {
+      theme = value;
+    } else {
+      theme = 'system';
+    }
+  }
+
+  if (isDarkCookie && theme !== 'system') {
+    const darkCookieValue = isDarkCookie?.split('=')[1];
+
+    colorScheme = darkCookieValue
+      ? decodeURIComponent(darkCookieValue) === 'true'
+        ? 'dark'
+        : 'light'
+      : undefined;
+  }
+
+  return { theme, colorScheme };
 };
