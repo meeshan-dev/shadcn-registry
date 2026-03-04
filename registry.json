@@ -4,23 +4,45 @@
   "homepage": "https://shadcn-registry.meeshan.dev",
   "items": [
     {
-      "type": "registry:lib",
-      "name": "theme-manager",
-      "title": "SSR Theme Manager",
-      "description": "A flexible, SSR-compatible theme management solution for React.",
+      "type": "registry:component",
+      "name": "theme-provider",
+      "title": "SSR-Ready Theme Manager",
+      "description": "Easily manage light and dark themes in React with server-side rendering support",
       "author": "M Zeeshan <https://meeshan.dev>",
       "registryDependencies": ["button", "dropdown-menu", "kbd", "tooltip"],
       "dependencies": ["@tabler/icons-react"],
       "files": [
         {
-          "type": "registry:lib",
-          "path": "registry/lib/theme-manager/theme-manager.tsx",
-          "target": "~/app/lib/theme-manager.tsx"
-        },
+          "type": "registry:component",
+          "path": "registry/components/theme-provider.tsx"
+        }
+      ]
+    },
+    {
+      "type": "registry:component",
+      "name": "subscribe-form-state",
+      "title": "Form State Subscriber",
+      "description": "Subscribe to React Hook Form state changes with isolated rerenders and access form state via render props.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "dependencies": ["react-hook-form"],
+      "files": [
         {
           "type": "registry:component",
-          "path": "registry/lib/theme-manager/theme-provider.ts",
-          "target": "~/app/providers/theme-provider.ts"
+          "path": "registry/components/subscribe-form-state.tsx"
+        }
+      ]
+    },
+    {
+      "type": "registry:component",
+      "name": "watch-form-state",
+      "title": "Form Values Watcher",
+      "description": "Watch specific React Hook Form values efficiently and pass them to children via render props without unnecessary rerenders.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "dependencies": ["react-hook-form"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/components/watch-form-state.tsx"
         }
       ]
     }
