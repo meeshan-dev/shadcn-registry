@@ -45,6 +45,20 @@
           "path": "registry/components/watch-form-values.tsx"
         }
       ]
+    },
+    {
+      "type": "registry:component",
+      "name": "bprogress-provider",
+      "title": "BProgress Provider",
+      "description": "Provides a progress bar component for React applications.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "dependencies": ["@bprogress/react"],
+      "files": [
+        {
+          "type": "registry:component",
+          "path": "registry/components/bprogress-provider.tsx"
+        }
+      ]
     }
   ]
 }
