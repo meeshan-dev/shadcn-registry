@@ -59,6 +59,20 @@
           "path": "registry/components/bprogress-provider.tsx"
         }
       ]
+    },
+    {
+      "type": "registry:lib",
+      "name": "notify-error",
+      "title": "Notify Error",
+      "description": "Displays a toast notification when an error occurs.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "registryDependencies": ["sonner"],
+      "files": [
+        {
+          "type": "registry:lib",
+          "path": "registry/lib/notify-error.ts"
+        }
+      ]
     }
   ]
 }
