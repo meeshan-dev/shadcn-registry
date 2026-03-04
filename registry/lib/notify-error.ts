@@ -1,6 +1,9 @@
 import { toast } from 'sonner';
 
-export function notifyError(error: unknown, { id }: { id?: string } = {}) {
+export function notifyError(
+  error: unknown,
+  { id }: { id?: string | number } = {},
+) {
   if (import.meta.env.DEV) {
     console.error(error);
   }
