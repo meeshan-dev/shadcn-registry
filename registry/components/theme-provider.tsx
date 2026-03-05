@@ -28,8 +28,6 @@ export type SetThemeProps =
 const ThemeContext = React.createContext<
   | {
       theme: string;
-      resolvedTheme: 'light' | 'dark';
-      isDark: boolean;
       setTheme: (theme: SetThemeProps) => void;
     }
   | undefined
@@ -83,9 +81,6 @@ export const ThemeProvider = ({
     [resolveTheme],
   );
 
-  const resolvedTheme = resolveTheme(themeState);
-  const isDark = resolvedTheme === 'dark';
-
   const themeEventHandler = useEffectEvent(() => {
     if (themeState === 'system') applyTheme('system');
   });
@@ -98,9 +93,7 @@ export const ThemeProvider = ({
   }, []);
 
   return (
-    <ThemeContext.Provider
-      value={{ theme: themeState, resolvedTheme, isDark, setTheme: applyTheme }}
-    >
+    <ThemeContext.Provider value={{ theme: themeState, setTheme: applyTheme }}>
       <SetThemeContext.Provider value={applyTheme}>
         {children}
       </SetThemeContext.Provider>
