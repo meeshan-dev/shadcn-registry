@@ -73,6 +73,32 @@
           "path": "registry/lib/notify-error.ts"
         }
       ]
+    },
+    {
+      "type": "registry:lib",
+      "name": "context-scope",
+      "title": "Context Scope",
+      "description": "Provides a context scope for managing react context.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "files": [
+        {
+          "type": "registry:lib",
+          "path": "registry/lib/context-scope.tsx"
+        }
+      ]
+    },
+    {
+      "type": "registry:lib",
+      "name": "merge-refs",
+      "title": "Merge Refs",
+      "description": "Provides a utility to merge multiple React refs into a single ref.",
+      "author": "M Zeeshan <https://meeshan.dev>",
+      "files": [
+        {
+          "type": "registry:lib",
+          "path": "registry/lib/merge-refs.ts"
+        }
+      ]
     }
   ]
 }
