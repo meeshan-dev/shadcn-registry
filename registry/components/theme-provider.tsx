@@ -121,7 +121,7 @@ export const KeyboardThemeToggler = () => {
   const setTheme = useSetTheme();
 
   const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
-    if (event.key === 'd' && (event.ctrlKey || event.metaKey)) {
+    if (event.key === 'd' && event.shiftKey) {
       event.preventDefault();
       setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     }
@@ -172,7 +172,7 @@ export const ToggleThemeButton = () => {
       />
 
       <TooltipContent className="**:font-sans **:text-xs **:font-medium">
-        <kbd>Ctrl / Cmd</kbd> + <kbd>D</kbd>
+        <kbd>Shift</kbd> + <kbd>D</kbd>
       </TooltipContent>
     </Tooltip>
   );
