@@ -170,8 +170,9 @@ export const ToggleThemeButton = () => {
           </Button>
         }
       />
-      <TooltipContent>
-        <Kbd>Ctrl / Cmd</Kbd> + <Kbd>D</Kbd>
+
+      <TooltipContent className="**:font-sans **:text-xs **:font-medium">
+        <kbd>Ctrl / Cmd</kbd> + <kbd>D</kbd>
       </TooltipContent>
     </Tooltip>
   );
