@@ -48,38 +48,36 @@ export const ThemeProvider = ({
 }) => {
   const [themeState, setThemeState] = React.useState(currentTheme);
 
-  const resolveTheme = useCallback((input: 'light' | 'dark' | 'system') => {
-    if (input === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-    return input;
+  const applyTheme = useCallback((next: SetThemeProps) => {
+    setThemeState((prev) => {
+      const newTheme = typeof next === 'function' ? next(prev) : next;
+
+      document.documentElement.classList.remove('light', 'dark');
+
+      let resolved = newTheme;
+
+      if (newTheme === 'system') {
+        const isDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+
+        resolved = isDark ? 'dark' : 'light';
+      }
+
+      document.documentElement.classList.add(resolved);
+      document.documentElement.style.colorScheme =
+        resolved === 'dark' ? 'dark' : 'light';
+
+      setCookie(THEME_COOKIE_KEY, resolved, DEFAULT_MAX_AGE);
+      setCookie(
+        IS_DARK_COOKIE_KEY,
+        resolved === 'dark' ? 'true' : 'false',
+        DEFAULT_MAX_AGE,
+      );
+
+      return resolved;
+    });
   }, []);
-
-  const applyTheme = useCallback(
-    (next: SetThemeProps) => {
-      setThemeState((prev) => {
-        const newTheme = typeof next === 'function' ? next(prev) : next;
-        const resolved = resolveTheme(newTheme as 'light' | 'dark' | 'system');
-
-        document.documentElement.classList.remove('light', 'dark');
-        document.documentElement.classList.add(resolved);
-        document.documentElement.style.colorScheme =
-          resolved === 'dark' ? 'dark' : 'light';
-
-        setCookie(THEME_COOKIE_KEY, newTheme as string, DEFAULT_MAX_AGE);
-        setCookie(
-          IS_DARK_COOKIE_KEY,
-          resolved === 'dark' ? 'true' : 'false',
-          DEFAULT_MAX_AGE,
-        );
-
-        return newTheme;
-      });
-    },
-    [resolveTheme],
-  );
 
   const themeEventHandler = useEffectEvent(() => {
     if (themeState === 'system') applyTheme('system');
@@ -93,24 +91,22 @@ export const ThemeProvider = ({
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme: themeState, setTheme: applyTheme }}>
-      <SetThemeContext.Provider value={applyTheme}>
-        {children}
-      </SetThemeContext.Provider>
-    </ThemeContext.Provider>
+    <ThemeContext value={{ theme: themeState, setTheme: applyTheme }}>
+      <SetThemeContext value={applyTheme}>{children}</SetThemeContext>
+    </ThemeContext>
   );
 };
 
 // -------------------- Hooks -------------------- //
 
 export const useTheme = () => {
-  const ctx = React.useContext(ThemeContext);
+  const ctx = React.use(ThemeContext);
   if (!ctx) throw new Error('useTheme must be used within a ThemeProvider');
   return ctx;
 };
 
 export const useSetTheme = () => {
-  const ctx = React.useContext(SetThemeContext);
+  const ctx = React.use(SetThemeContext);
   if (!ctx) throw new Error('useSetTheme must be used within a ThemeProvider');
   return ctx;
 };
@@ -121,7 +117,7 @@ export const KeyboardThemeToggler = () => {
   const setTheme = useSetTheme();
 
   const handleKeyDown = useEffectEvent((event: KeyboardEvent) => {
-    if (event.key === 'd' && event.shiftKey) {
+    if (event.key === 'D' && event.shiftKey) {
       event.preventDefault();
       setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     }
